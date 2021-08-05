@@ -1,0 +1,39 @@
+The Church encoding of a number "n" is a function taking two arguments:
+* the first argument is some "s"
+* the second argument is some "z"
+and it returns n times s applied to z.
+
+2 = λ s . λ z . s (s z)
+
+3 = λ s' . λ z' . s' (s' (s' z'))
+
+SUCC = λ n . λ s . λ z . s (n s z)
+
+
+SUCC 3 = (λ n . λ s . λ z . s (n s z)) 3 →
+         λ s . λ z . s (3 s z) →
+         λ s . λ z . s ((λ s' . λ z' . s' (s' (s' z'))) s z) → (2 steps)
+         λ s . λ z . s (s (s (s z))) = 4
+
+2 SUCC 3 = (λ s . λ z . s (s z)) SUCC 3 →
+           (λ z . SUCC (SUCC z)) 3 →
+           SUCC (SUCC 3) → (several steps)
+           SUCC 4 → (several steps)
+           5.
+
+
+T = λ x . λ y . x
+F = λ x . λ y . y
+
+How to fill in
+
+   AND = λ b₁ . λ b₂ . b₁ b₂ F
+
+s.t. AND T T → T, AND T F → F, AND F T → F, AND F F → F.
+
+Check that indeed AND satisfies the four equations above:
+AND T F = (λ b₁ . λ b₂ . b₁ b₂ F) T F →
+          T F F =
+          (λ x . λ y . x) F F →
+          F.
+(similarly for the other 3 cases).

@@ -1,0 +1,77 @@
+ghci
+:set prompt "ghci> "
+https://us04web.zoom.us/j/74701505000?pwd=Uk9xUEo4NHFoaGh3MTJjbDdxWlRnZz09
+
+succ for ++
+max/min
+div for int division
+:l for load modules
+:? for help
+let for declaring vars ONLY in terminal
+++ for joining two arrays
+: for putting an element in the first index of an array
+!! for removing an element for the index of an array
+head first element of an array / tail is the rest
+last last element of an array / init is the rest
+length, null, reverse obviously
+take x [] extract x elements from array
+drop x [] extract x elements from the end of the array
+maximum / minimum same as max/min but for arrays
+sum, product,  obviously
+`elem` tells if an element is in a list
+[x..p] start an array in x and ends in p let x be 1 or 'a'; same for p
+[x,y..z] y for next element -> steps e.g. 3,6.. 20 is 3,6,9,..,18
+cycle for array while loops use with take x ( )
+repeat for single things
+replicate x y returns x times the value of y
+
+TUPLES: fst, snd obviously
+zip[] [] joins the elements of two arrays in pairs
+
+TYPECLASSES: interfaces for a behavior e.g. == can be used with int or char
+
+LIST COMPREHENSIONS: _ means we don't care what that part is
+
+https://us04web.zoom.us/j/74701505000?pwd=Uk9xUEo4NHFoaGh3MTJjbDdxWlRnZz09#success
+
+***LAMBDA CALC***
+ ARITHMETIC
+The Church encoding of a number "n" is a function taking two arguments:
+* the first argument is some "s"
+* the second argument is some "z"
+and it returns n times s applied to z.
+
+2 = λ s . λ z . s (s z)
+
+3 = λ s' . λ z' . s' (s' (s' z'))
+
+SUCC = λ n . λ s . λ z . s (n s z)
+
+
+SUCC 3 = (λ n . λ s . λ z . s (n s z)) 3 →
+         λ s . λ z . s (3 s z) →
+         λ s . λ z . s ((λ s' . λ z' . s' (s' (s' z'))) s z) → (2 steps)
+         λ s . λ z . s (s (s (s z))) = 4
+
+2 SUCC 3 = (λ s . λ z . s (s z)) SUCC 3 →
+           (λ z . SUCC (SUCC z)) 3 →
+           SUCC (SUCC 3) → (several steps)
+           SUCC 4 → (several steps)
+           5.
+
+			CONDITIONALS
+T = λ x . λ y . x
+F = λ x . λ y . y
+
+How to fill in
+
+   AND = λ b₁ . λ b₂ . b₁ b₂ F
+
+s.t. AND T T → T, AND T F → F, AND F T → F, AND F F → F.
+
+Check that indeed AND satisfies the four equations above:
+AND T F = (λ b₁ . λ b₂ . b₁ b₂ F) T F →
+          T F F =
+          (λ x . λ y . x) F F → 
+          F.
+(similarly for the other 3 cases).
